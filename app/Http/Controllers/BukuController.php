@@ -47,10 +47,36 @@ class BukuController extends Controller
 
         return redirect('/buku')->with('success', 'Buku berhasil ditambahkan!');
     }
-        public function destroy($id){
-            $buku = buku::find($id);
-            $buku -> delete();
-    
-            return redirect ('/buku');
+    public function hapus($id)
+    {
+        $buku = Buku::find($id);
+        $buku->delete();
+
+        return redirect('/buku');
+    }
+    public function edit($id)
+    {
+        $buku = Buku::findOrFail($id);
+        return view('buku.edit', ['buku'=>$buku]);
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'judul'=>'required',
+            'penulis'=>'required',
+            'penerbit'=>'required',
+            'tahun_terbit'=>'required',
+
+        ]);
+        Buku::find($id)->update([
+            'judul' => $request->judul,
+            'penulis' => $request->penulis,
+            'penerbit' => $request->penerbit,
+            'tahun_terbit' => $request->tahun_terbit,
+           
+        ]);
+       
+
+        return redirect('/buku');
     }
 }

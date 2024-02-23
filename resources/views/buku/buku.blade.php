@@ -9,9 +9,7 @@
 
                     <div class="card-body">
                         <div class="mb-4">
-                            <a href="{{ route('buku.create') }}" class="btn btn-primary">
-                                + Tambah Data Buku
-                            </a>
+                        
                         </div>
 
                         <table class="table table-bordered">
@@ -30,25 +28,19 @@
                                 @forelse ($buku as $b)
                                     <tr>
                                       
-                                        <td>{{ $b->judul }}</td>
+                                    <td>{{ $b->judul }}</td>
                                         <td>{{ $b->penulis }}</td>
                                         <td>{{ $b->penerbit }}</td>
                                         <td>{{ $b->tahun_terbit }}</td>
                                         <td>
-                                            <form action="{{route('buku.destroy',$b->id)}}"method="POST">
-                                                @csrf 
-                                                @method('DELETE')
-
-                                                <button class="btn btn-primary" type="submit">
-                                                    <i class="fa fa-trash-alt"></i>
-</button>
-<button class="btn btn-primary" type="submit">
-    <i class="fa fa-edit"></i>
-</button>
-</form>
-</td>
-                                      
-                                    </tr>
+                                            <a href="{{ route('buku.edit', $b->id) }}" class="btn btn-primary">
+                                                Edit
+                                            </a>
+                                        <a href="{{ route('buku.hapus', $b->id) }}" class="btn btn-danger">
+                                            Hapus
+                                        </a>
+                                        </td>
+                                </tr>
                                 @empty
                                     <tr>
                                         <td colspan="6" class="text-center">Tidak ada data buku.</td>
@@ -56,6 +48,11 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        <div class="mb-4">
+                            <a href="{{ route('buku.create') }}" class="btn btn-primary">
+                                + Tambah Data Buku
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
