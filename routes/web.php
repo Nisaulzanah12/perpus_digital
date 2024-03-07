@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/kategori/destroy/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
     Route::get('/buku/edit/{id}',[BukuController::class, 'edit'])->name('buku.edit');
     Route::get('/buku/hapus/{id}',[BukuController::class, 'hapus'])->name('buku.hapus');
-    Route::post('/buku/update/{id}',[BukuController::class, 'update'])->name('buku.update');
+    Route::put('/buku/update/{id}',[BukuController::class, 'update'])->name('buku.update');
     Route::get('/buku', [BukuController::class, 'index'])->name('buku.index');
     Route::get('/buku/tambah', [BukuController::class, 'create'])->name('buku.create');
     Route::post('/buku/store', [BukuController::class, 'store'])->name('buku.store');
@@ -48,4 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/buku/store', [BukuController::class, 'store'])->name('buku.store');
     Route::get('/report', [PeminjamanController::class, 'print'])->name('print'); 
 });
+Route::get('/buku/detail/{id}', [BukuController::class, 'show'])->name('buku.show');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes();
 
